@@ -20,7 +20,9 @@ $('.play').each(function(){
                     array2.sort(function(a, b){return a-b});})
                 //call function to see if this player wins this turn and pop a message
                 if(winning(array2)=='win'){
-                    $('#win').html(`<h4 class="alert-heading">Game Over</h4>
+                    $('#gameover').attr('class','alert alert-success');
+                    $('#gameover').attr('role',"alert")
+                    $('#gameover').html(`<h4 class="alert-heading">Game Over</h4>
                     <p>Player 2 won!</p>`)
                 };
                 $('h3').text(`It's player 1 turn`);
@@ -34,7 +36,9 @@ $('.play').each(function(){
                 $.each(array1, function(index,value) {
                     array1.sort(function(a, b){return a-b});})
                     if(winning(array1)=='win'){
-                        $('#win').html(`<h4 class="alert-heading">Game Over</h4>
+                        $('#gameover').attr('class','alert alert-success');
+                        $('#gameover').attr('role',"alert")
+                        $('#gameover').html(`<h4 class="alert-heading">Game Over</h4>
                         <p>Player 1 won!</p>`)
                     };
                 $('h3').text(`It's player 2 turn`);}
@@ -44,7 +48,10 @@ $('.play').each(function(){
             i++;
         }
         else{
-            
+            $('#gameover').attr('class','alert alert-danger');
+            $('#gameover').attr('role',"alert")
+            $('#gameover').html(`<h4 class="alert-heading">Game Over</h4>
+            <p>Nobody won!</p>`)
         }
         
     })
@@ -55,7 +62,8 @@ playGame();
 
 //Making a restart button, which is going to set all the div element back to the original buttons 
 $( "#restart" ).on( "click", function() {
-    $('#win').text('');
+    $('#gameover').empty();
+    $('#gameover').attr('class','');
     $('h3').text(`It's player 1 turn`);
     i=1;
     for (k=0;k<9;k++){ 
@@ -76,26 +84,25 @@ let winningArray=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6
 //function to compare the player's array vs the winning array to see if they win or not
 winning=(arr)=>{
     //only when there are more than 3 x's or o's to be able to win, we dont need to worry when player's array is less than 3
+    let winAr=[];
     if (arr.length>2){
             //compare player's array to each winning array
+        while(winAr<3){
+            //create a placeholder array to collect possible winning positions
+            winAr=[];
             for (j=0;j<winningArray.length;j++){
-                let winAr=[];
                 for(n=0;n<3;n++){
                     var found = $.inArray(winningArray[j][n], arr);
+                    //if there's a value from the player's array in winninArray then the value got pushed to winAr
                     if( !(-1 == found) ) {
                         winAr.push(winningArray[j][n]);
                     }
-                if (winAr.length=3){
-                    return 'win';
-                    break;
-                }
-                }
-                }
-            }
-    };
-          
-    
-
-
-
-    
+                } 
+            }  
+        }
+        if(winAr.length=3){
+            return 'win';
+           };
+        console.log(winAr);
+    }
+};
