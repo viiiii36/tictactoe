@@ -44,14 +44,15 @@ $('.play').each(function(){
                 $('h3').text(`It's player 2 turn`);}
             console.log(array1);
             console.log(array2);
-            if(i==9){
+            i++;
+            if(i==10){
                 $('#gameover').attr('class','alert alert-danger');
                 $('#gameover').attr('role',"alert")
                 $('#gameover').html(`<h4 class="alert-heading">Game Over</h4>
                 <p>Nobody won!</p>`)
             }
             console.log(i);
-            i++;
+            
         }
     })
 })
