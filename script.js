@@ -44,18 +44,18 @@ $('.play').each(function(){
                 $('h3').text(`It's player 2 turn`);}
             console.log(array1);
             console.log(array2);
+            if(i==9){
+                $('#gameover').attr('class','alert alert-danger');
+                $('#gameover').attr('role',"alert")
+                $('#gameover').html(`<h4 class="alert-heading">Game Over</h4>
+                <p>Nobody won!</p>`)
+            }
             console.log(i);
             i++;
         }
-        else{
-            $('#gameover').attr('class','alert alert-danger');
-            $('#gameover').attr('role',"alert")
-            $('#gameover').html(`<h4 class="alert-heading">Game Over</h4>
-            <p>Nobody won!</p>`)
-        }
-        
     })
 })
+
 }
 //function playGame is going to be add into reset button so we can play another game
 playGame();
@@ -80,29 +80,38 @@ Vertical: [0,3,6] [1,4,7] [2,5,8]
 Diagonal: [0,4,8] [2,4,6]
 */
 
-let winningArray=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+let winningArray=[0,1,2,3,4,5,6,7,8,0,3,6,1,4,7,2,5,8,0,4,8,2,4,6];
 //function to compare the player's array vs the winning array to see if they win or not
 winning=(arr)=>{
-    //only when there are more than 3 x's or o's to be able to win, we dont need to worry when player's array is less than 3
-    let winAr=[];
-    if (arr.length>2){
-            //compare player's array to each winning array
-        while(winAr<3){
-            //create a placeholder array to collect possible winning positions
-            winAr=[];
-            for (j=0;j<winningArray.length;j++){
-                for(n=0;n<3;n++){
-                    var found = $.inArray(winningArray[j][n], arr);
-                    //if there's a value from the player's array in winninArray then the value got pushed to winAr
-                    if( !(-1 == found) ) {
-                        winAr.push(winningArray[j][n]);
-                    }
-                } 
-            }  
+//only when there are more than 3 x's or o's to be able to win, we dont need to worry when player's array is less than 3
+if (arr.length>2){
+    //There are 8 winning positional combinations
+    //compare what player has with each combo
+    for (i=0;i<8;i++){
+        //create each combo array for comparison
+        let winCombo=winningArray.slice(i*3,i*3+3);
+        //Create 
+        //let winAr=[];
+        for (k=0;k<arr.length;k++){
+            if($.inArray(arr[k],winCombo)!=-1){
+                console.log('yes')
+            }
         }
-        if(winAr.length=3){
+       // let printOut=winAr.slice();
+        //console.log(printOut);
+        /*if (winAr.length=3){
             return 'win';
-           };
-        console.log(winAr);
+            break;*/
     }
-};
+}
+}
+    /*let winAr=[];
+    if (arr.length>2){
+        let winLine= winningArray[1];
+            
+            }
+        console.log(winAr);
+        if ($.inArray('3',winAr)!=-1){
+            return 'win';
+        }
+    }*/
