@@ -82,37 +82,21 @@ Diagonal: [0,4,8] [2,4,6]
 */
 
 let winningArray=[0,1,2,3,4,5,6,7,8,0,3,6,1,4,7,2,5,8,0,4,8,2,4,6];
-//function to compare the player's array vs the winning array to see if they win or not
+//function to decide if the player's winning 
 winning=(arr)=>{
-//only when there are more than 3 x's or o's to be able to win, we dont need to worry when player's array is less than 3
-if (arr.length>2){
+    let i=0;
     //There are 8 winning positional combinations
-    //compare what player has with each combo
-    for (i=0;i<8;i++){
-        //create each combo array for comparison
-        let winCombo=winningArray.slice(i*3,i*3+3);
-        //Create 
-        //let winAr=[];
-        for (k=0;k<arr.length;k++){
-            if($.inArray(arr[k],winCombo)!=-1){
-                console.log('yes')
+        while (i<8){
+            let winCombo=winningArray.slice(i*3,i*3+3);
+            //compare data from html td element
+            if($(`td#${winCombo[0]}`).html()==$(`td#${winCombo[1]}`).html() 
+            && $(`td#${winCombo[1]}`).html()==$(`td#${winCombo[2]}`).html()){
+                return 'win';
+                break;
             }
-        }
-       // let printOut=winAr.slice();
-        //console.log(printOut);
-        /*if (winAr.length=3){
-            return 'win';
-            break;*/
+        i++;
     }
 }
-}
-    /*let winAr=[];
-    if (arr.length>2){
-        let winLine= winningArray[1];
-            
-            }
-        console.log(winAr);
-        if ($.inArray('3',winAr)!=-1){
-            return 'win';
-        }
-    }*/
+
+       
+    
