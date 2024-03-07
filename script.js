@@ -15,7 +15,7 @@ $('.play').each(function(){
             if (i%2==0){
                 $(`td#${id}`).text('O');
                 array2.push(id);
-                //sort the player's array in ascending order to compare with the winning array
+                //sort the player's array in ascending order
                 $.each(array2, function(index,value) {
                     array2.sort(function(a, b){return a-b});})
                 //call function to see if this player wins this turn and pop a message
@@ -32,7 +32,7 @@ $('.play').each(function(){
             else{
                 $(`td#${id}`).text('X');
                 array1.push(id);
-                //sort the player's array in ascending order to compare with the winning array
+                //sort the player's array in ascending order 
                 $.each(array1, function(index,value) {
                     array1.sort(function(a, b){return a-b});})
                     if(winning(array1)=='win'){
